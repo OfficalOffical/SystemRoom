@@ -7,7 +7,7 @@ def main():
 
     while (True):
         req.show_choices()
-        choice = input('Enter choice(1-4):  ')
+        choice = input('Lütfen seçiniz: (1-4): ')
         print()
 
         if choice == '1':
