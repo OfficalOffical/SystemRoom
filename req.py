@@ -60,7 +60,7 @@ def read_records():
     infile.close()
 
 
-def search_record(rafTur, rafKat, rafNo, rafIndex=None):
+def search_record(rafTur, rafKat, rafNo, rafIndex):
     infile = open('noSqlDB', 'rb')
 
     flag = False
@@ -70,12 +70,7 @@ def search_record(rafTur, rafKat, rafNo, rafIndex=None):
         try:
             # reading the oject from file
             sistem = pickle.load(infile)
-            if sistem['rafTur'] == rafTur and sistem['rafKat'] == rafKat and sistem[
-                'rafNo'] == rafNo and rafIndex == None:  # This is where the error happens
-                print("Raf No : ", sistem['rafIndex'], "Raf data : ", sistem['rafIndexData'])
-                print(":", rafIndex)
-                flag = True
-                break
+
             # display record if found and set flag
             if (sistem['rafTur'] == rafTur and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
                 print(sistem['rafIndexData'])
