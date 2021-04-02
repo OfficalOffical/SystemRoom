@@ -7,7 +7,7 @@ def main():
 
     while (True):
         req.show_choices()
-        choice = input('Lütfen seçiniz: (1-4): ')
+        choice = input('Enter choice(1-4): ')
         print()
 
         if choice == '1':
@@ -21,7 +21,8 @@ def main():
             rafTur = input('Rafın türünü giriniz : ')
             rafKat = int(input('Rafın katını giriniz : '))
             rafNo = int(input('Rafın Nosunu giriniz : '))
-            rafIndex = int(input('Rafın indexini giriniz : '))
+
+            rafIndex = int(input('Rafın indexini giriniz : '))#if else le none veya int cast döndürebilirsin
             req.search_record(rafTur, rafKat, rafNo, rafIndex)
 
         elif choice == '4':
