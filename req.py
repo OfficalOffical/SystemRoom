@@ -63,10 +63,11 @@ def read_records():
 def search_record(rafTur, rafKat, rafNo, rafIndex):
     infile = open('noSqlDB', 'rb')
     sistem = pickle.load(infile)
+    temp = len(list(unpickle_database('noSqlDB')))
     flag = False
 
     # read to the end of file.
-    for x in range((len(sistem)+1)):
+    for x in range(temp):
         if x % 10 == 0:
             print("Raf Türü |", "Raf Kat |", "Raf No |", "Raf Index |", "Raf Index Data")
         try:
@@ -152,7 +153,7 @@ def save_object(obj, filename,a):
 def delPic():
     infile = open('noSqlDB', 'rb')
     students = list(unpickle_database('noSqlDB'))
-
+    temp2 = len(list(unpickle_database('noSqlDB')))
     sistem = pickle.load(infile)
 
     temp =0
@@ -164,7 +165,8 @@ def delPic():
     rafNo = int(input('Rafın Nosunu giriniz : '))
     rafIndex = int(input('Rafın indexini giriniz : '))
 
-    for x in range((len(sistem) + 1)):
+
+    for x in range(temp2):
         try:
 
             if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem[
@@ -180,10 +182,6 @@ def delPic():
     if flag == False:
         print('Record not Found')
         print()
-
-
-
-
 
     for student in students:
         print(student)
