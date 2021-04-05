@@ -22,12 +22,7 @@ def set_data():
 
 
 def display_data(sistem):
-    print('Rafin türü : ', sistem['rafTur'])
-    print('Rafin kati : ', sistem['rafKat'])
-    print('Rafın No\'su :', sistem['rafNo'])
-    print('Rafın Indexi :', sistem['rafIndex'])
-    print('Rafın Datası:', sistem['rafIndexData'])
-    print()
+    print("   ",sistem['rafTur'],"   |   ",sistem['rafKat'],"   |   ",sistem['rafNo'],"       ", sistem['rafIndex'],"     ", sistem['rafIndexData'])
 
 
 def write_record():
@@ -44,15 +39,18 @@ def write_record():
 def read_records():
     # open file in binary mode for reading
     infile = open('noSqlDB', 'rb')
-
+    x = 0
     # read to the end of file.
     while True:
         try:
+            if x % 10 == 0:
+                print("Raf Türü |", "Raf Kat |", "Raf No |", "Raf Index |", "Raf Index Data")
             # reading the oject from file
             sistem = pickle.load(infile)
 
             # display the object
             display_data(sistem)
+            x+=1
         except EOFError:
             break
 
