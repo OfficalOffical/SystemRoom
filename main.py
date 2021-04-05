@@ -25,11 +25,15 @@ def main():
             rafIndex = input('Rafın indexini giriniz : ') #if else le none veya int cast döndürebilirsin
 
             rafTur,rafKat,rafNo,rafIndex = req.toCast(rafTur, rafKat, rafNo, rafIndex)
-
             req.search_record(rafTur, rafKat, rafNo, rafIndex)
 
         elif choice == '4':
             break
+
+        elif choice == '5':
+            req.delPic()
+
+
 
         else:
             print('Invalid input')
