@@ -1,4 +1,3 @@
-# encoding:utf-8
 import pickle
 
 
@@ -71,15 +70,13 @@ def search_record(rafTur, rafKat, rafNo, rafIndex):
     for x in range((len(sistem)+1)):
         try:
 
-            if (sistem['rafTur'].upper() == rafTur.upper() and rafKat == "" and rafNo == ""
-                    and rafIndex == ""):
+            if (sistem['rafTur'].upper() == rafTur.upper() and rafKat == ""):
 
                 print(sistem['rafTur'],sistem['rafNo'], sistem['rafIndex'], sistem['rafIndexData'])
                 flag = True
 
-
             elif (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and
-                    rafNo == "" and rafIndex == ""):
+                    rafNo == ""):
 
                 print(sistem['rafNo'], sistem['rafIndex'], sistem['rafIndexData'])
                 flag = True
@@ -109,11 +106,12 @@ def search_record(rafTur, rafKat, rafNo, rafIndex):
 
 
 def show_choices():
-    print('Menu')
-    print('1. Add Record')
-    print('2. Display Records')
-    print('3. Search a Record')
-    print('4. Exit')
+    print('Menü')
+    print('1. Kayıt ekle')
+    print('2. Bütün kayıtları görüntüle')
+    print('3. Spesifik bir kaydı görüntüle')
+    print('4. Bir kaydı sil')
+    print('5. Çıkış yap')
 
 def toCast(rafTur, rafKat, rafNo, rafIndex):
     if rafTur != "":
@@ -131,6 +129,30 @@ def toCast(rafTur, rafKat, rafNo, rafIndex):
 
     return  rafTur,rafKat,rafNo,rafIndex
 
+def delPic():
+    infile = open('noSqlDB', 'rb')
+    sistem = pickle.load(infile)
+    flag = False
 
+    rafTur = str(input('Rafın türünü giriniz : '))
+    rafKat = int(input('Rafın katını giriniz : '))
+    rafNo = int(input('Rafın Nosunu giriniz : '))
+    rafIndex = int(input('Rafın indexini giriniz : '))
 
+    # read to the end of file.
+    for x in range((len(sistem) + 1)):
+        try:
 
+            if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
+
+                print(sistem['rafIndexData'])
+                flag = True
+
+            sistem = pickle.load(infile)
+        except EOFError:
+            break
+
+    if flag == False:
+        print('Record not Found')
+
+    infile.close()

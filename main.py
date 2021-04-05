@@ -8,7 +8,7 @@ def main():
 
     while (True):
         req.show_choices()
-        choice = input('Enter choice(1-4): ')
+        choice = input('Bir seçim yapınız(1-5) : ')
         print()
 
         if choice == '1':
@@ -28,10 +28,10 @@ def main():
             req.search_record(rafTur, rafKat, rafNo, rafIndex)
 
         elif choice == '4':
-            break
+            req.delPic()
 
         elif choice == '5':
-            req.delPic()
+            break
 
 
 
