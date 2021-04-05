@@ -2,13 +2,14 @@
 import pickle
 
 
+
 def set_data():
     rafTur = input('Rafın türünü giriniz : ')
     rafKat = int(input('Rafın katını giriniz : '))
     rafNo = int(input('Rafın Nosunu giriniz : '))
     rafIndex = int(input('Rafın indexini giriniz : '))
     rafIndexData =  input('Rafın datasını giriniz :  ')
-    print()
+    rafTur, rafKat, rafNo, rafIndex = toCast(rafTur, rafKat, rafNo, rafIndex)
 
     # create a dictionary
     sistem = {}
@@ -60,7 +61,7 @@ def read_records():
     infile.close()
 
 
-def search_record(rafTur, rafKat, rafNo, rafIndex):
+def search_record(rafTur, rafKat, rafNo, rafIndex=None):
     infile = open('noSqlDB', 'rb')
 
     flag = False
@@ -73,7 +74,7 @@ def search_record(rafTur, rafKat, rafNo, rafIndex):
 
             # display record if found and set flag
             if (sistem['rafTur'] == rafTur and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
-                print(sistem['rafIndexData'])
+                print(sistem['rafIndexData'].encode('utf-8'))
                 flag = True
                 break
 
@@ -94,3 +95,20 @@ def show_choices():
     print('2. Display Records')
     print('3. Search a Record')
     print('4. Exit')
+
+def toCast(rafTur, rafKat, rafNo, rafIndex):
+    if rafTur != None:
+        print("a")
+        rafTur = int(rafTur) #Change this
+    if rafKat != None:
+        print("b")
+        rafKat = int(rafKat)
+    if rafNo != None:
+        print("c")
+        rafNo = int(rafNo)
+    if rafIndex != None:
+        print("d")
+        rafIndex = int(rafIndex)
+
+
+    return  rafTur,rafKat,rafNo,rafIndex

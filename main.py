@@ -1,6 +1,7 @@
 # encoding:utf-8
 import pickle
 import req
+import string
 
 
 def main():
@@ -19,9 +20,12 @@ def main():
         elif choice == '3':
 
             rafTur = input('Rafın türünü giriniz : ')
-            rafKat = int(input('Rafın katını giriniz : '))
-            rafNo = int(input('Rafın Nosunu giriniz : '))
-            rafIndex = int(input('Rafın indexini giriniz : ')) #if else le none veya int cast döndürebilirsin
+            rafKat = input('Rafın katını giriniz : ')
+            rafNo = input('Rafın Nosunu giriniz : ')
+            rafIndex = input('Rafın indexini giriniz : ') #if else le none veya int cast döndürebilirsin
+
+            rafTur,rafKat,rafNo,rafIndex = req.toCast(rafTur, rafKat, rafNo, rafIndex)
+
             req.search_record(rafTur, rafKat, rafNo, rafIndex)
 
         elif choice == '4':
