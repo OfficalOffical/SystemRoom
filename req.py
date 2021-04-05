@@ -181,14 +181,16 @@ def delPic():
         print('Record not Found')
         print()
 
-    for student in sistemList:
-        print(student)
-        save_object(student, 'noSqlDB',temp)
+    for x in sistemList:
+        print(x)
+        save_object(x, 'noSqlDB',temp)
         temp += 1
 
 def sortPic():
-    infile = open('noSqlDB', 'rb')
     sistemList = list(unpickle_database('noSqlDB'))
-    sistem = pickle.load(infile)
-
-    print(sorted(sistem,key=lambda i: i['rafNo']))
+    sortedSistemList = sorted(sistemList,key=lambda i: (i['rafTur'], i['rafKat']))
+    temp = 0
+    for x in sortedSistemList:
+        print(x)
+        save_object(x, 'noSqlDB', temp)
+        temp += 1

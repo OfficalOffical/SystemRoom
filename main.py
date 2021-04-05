@@ -13,6 +13,7 @@ def main():
 
         if choice == '1':
             req.write_record()
+            req.sortPic()
 
         elif choice == '2':
             req.read_records()
