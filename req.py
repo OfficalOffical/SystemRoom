@@ -15,7 +15,6 @@ def set_data():
     sistem['rafTur'] = rafTur
     sistem['rafKat'] = rafKat
     sistem['rafNo'] = rafNo
-
     sistem['rafIndex'] = rafIndex
     sistem['rafIndexData'] = rafIndexData
 
@@ -130,7 +129,7 @@ def toCast(rafTur, rafKat, rafNo, rafIndex):
     return  rafTur,rafKat,rafNo,rafIndex
 
 def delPic():
-    infile = open('noSqlDB', 'rb')
+    infile = open('noSqlDB', 'rb+')
     sistem = pickle.load(infile)
     flag = False
 
@@ -140,15 +139,15 @@ def delPic():
     rafIndex = int(input('Rafın indexini giriniz : '))
 
     # read to the end of file.
-    for x in range((len(sistem) + 1)):
+    for x in range((len(sistem)+1)):
         try:
 
             if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
-
-                print(sistem['rafIndexData'])
+                print("vololo")
+                del  sistem['rafTur'],sistem['rafKat'],sistem['rafNo'],sistem['rafIndex'],sistem['rafIndexData']
                 flag = True
 
-            sistem = pickle.load(infile)
+
         except EOFError:
             break
 
