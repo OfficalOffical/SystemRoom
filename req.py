@@ -4,18 +4,19 @@ import pickle
 
 
 def set_data():
-    rafTur = input('Rafın türünü giriniz : ')
+    rafTur = str(input('Rafın türünü giriniz : '))
     rafKat = int(input('Rafın katını giriniz : '))
     rafNo = int(input('Rafın Nosunu giriniz : '))
     rafIndex = int(input('Rafın indexini giriniz : '))
     rafIndexData =  input('Rafın datasını giriniz :  ')
-    rafTur, rafKat, rafNo, rafIndex = toCast(rafTur, rafKat, rafNo, rafIndex)
+
 
     # create a dictionary
     sistem = {}
+    sistem['rafTur'] = rafTur
     sistem['rafKat'] = rafKat
     sistem['rafNo'] = rafNo
-    sistem['rafTur'] = rafTur
+
     sistem['rafIndex'] = rafIndex
     sistem['rafIndexData'] = rafIndexData
 
@@ -61,23 +62,41 @@ def read_records():
     infile.close()
 
 
-def search_record(rafTur, rafKat, rafNo, rafIndex=None):
+def search_record(rafTur, rafKat, rafNo, rafIndex):
     infile = open('noSqlDB', 'rb')
-
+    sistem = pickle.load(infile)
     flag = False
 
     # read to the end of file.
-    while True:
+    for x in range((len(sistem)+1)):
         try:
-            # reading the oject from file
-            sistem = pickle.load(infile)
 
-            # display record if found and set flag
-            if (sistem['rafTur'] == rafTur and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
-                print(sistem['rafIndexData'].encode('utf-8'))
+            if (sistem['rafTur'].upper() == rafTur.upper() and rafKat == "" and rafNo == ""
+                    and rafIndex == ""):
+
+                print(sistem['rafTur'],sistem['rafNo'], sistem['rafIndex'], sistem['rafIndexData'])
                 flag = True
-                break
 
+
+            elif (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and
+                    rafNo == "" and rafIndex == ""):
+
+                print(sistem['rafNo'], sistem['rafIndex'], sistem['rafIndexData'])
+                flag = True
+
+            elif (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem[
+                'rafNo'] == rafNo and rafIndex == ""):
+
+                print(sistem['rafIndex'], sistem['rafIndexData'])
+                flag = True
+
+            elif (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem[
+                'rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
+
+                print(sistem['rafIndexData'])
+                flag = True
+
+            sistem = pickle.load(infile)
         except EOFError:
             break
 
@@ -97,18 +116,21 @@ def show_choices():
     print('4. Exit')
 
 def toCast(rafTur, rafKat, rafNo, rafIndex):
-    if rafTur != None:
-        print("a")
-        rafTur = int(rafTur) #Change this
-    if rafKat != None:
-        print("b")
+    if rafTur != "":
+        rafTur = str(rafTur) #Change this
+
+    if rafKat != "":
         rafKat = int(rafKat)
-    if rafNo != None:
-        print("c")
+
+    if rafNo != "":
         rafNo = int(rafNo)
-    if rafIndex != None:
-        print("d")
+
+    if rafIndex != "":
         rafIndex = int(rafIndex)
 
 
     return  rafTur,rafKat,rafNo,rafIndex
+
+
+
+
