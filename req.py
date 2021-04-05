@@ -150,7 +150,7 @@ def save_object(obj, filename,a):
 
 def delPic():
     infile = open('noSqlDB', 'rb')
-    students = list(unpickle_database('noSqlDB'))
+    sistemList = list(unpickle_database('noSqlDB'))
     temp2 = len(list(unpickle_database('noSqlDB')))
     sistem = pickle.load(infile)
 
@@ -170,7 +170,7 @@ def delPic():
             if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem[
                 'rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
 
-                del students[x]
+                del sistemList[x]
                 flag = True
 
             sistem = pickle.load(infile)
@@ -181,7 +181,14 @@ def delPic():
         print('Record not Found')
         print()
 
-    for student in students:
+    for student in sistemList:
         print(student)
         save_object(student, 'noSqlDB',temp)
         temp += 1
+
+def sortPic():
+    infile = open('noSqlDB', 'rb')
+    sistemList = list(unpickle_database('noSqlDB'))
+    sistem = pickle.load(infile)
+
+    print(sorted(sistem,key=lambda i: i['rafNo']))

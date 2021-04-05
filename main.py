@@ -33,6 +33,9 @@ def main():
         elif choice == '5':
             break
 
+        elif choice == '6':
+            req.sortPic()
+
 
 
         else:
