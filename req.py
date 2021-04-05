@@ -67,12 +67,12 @@ def search_record(rafTur, rafKat, rafNo, rafIndex):
 
     # read to the end of file.
     for x in range((len(sistem)+1)):
+        if x % 10 == 0:
+            print("Raf Türü |", "Raf Kat |", "Raf No |", "Raf Index |", "Raf Index Data")
         try:
-
             if (sistem['rafTur'].upper() == rafTur.upper() and rafKat == ""):
-                for x in range((len(sistem) + 1)):
-                    if x % 10 == 0:
-                        print("Raf Türü |","Raf Kat |", "Raf No |","Raf Index |", "Raf Index Data")
+
+
                 print("   ",sistem['rafTur'],"       ",sistem['rafNo'],"      ", sistem['rafIndex'],"      ", sistem['rafIndexData'])
                 flag = True
 
