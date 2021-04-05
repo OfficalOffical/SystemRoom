@@ -7,7 +7,7 @@ def set_data():
     rafKat = int(input('Rafın katını giriniz : '))
     rafNo = int(input('Rafın Nosunu giriniz : '))
     rafIndex = int(input('Rafın indexini giriniz : '))
-    rafIndexData =  input('Rafın datasını giriniz :  ')
+    rafIndexData = input('Rafın datasını giriniz :  ')
 
 
     # create a dictionary
@@ -70,8 +70,10 @@ def search_record(rafTur, rafKat, rafNo, rafIndex):
         try:
 
             if (sistem['rafTur'].upper() == rafTur.upper() and rafKat == ""):
-
-                print(sistem['rafTur'],sistem['rafNo'], sistem['rafIndex'], sistem['rafIndexData'])
+                for x in range((len(sistem) + 1)):
+                    if x % 10 == 0:
+                        print("Raf Türü |","Raf Kat |", "Raf No |","Raf Index |", "Raf Index Data")
+                print("   ",sistem['rafTur'],"       ",sistem['rafNo'],"      ", sistem['rafIndex'],"      ", sistem['rafIndexData'])
                 flag = True
 
             elif (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and
@@ -128,30 +130,62 @@ def toCast(rafTur, rafKat, rafNo, rafIndex):
 
     return  rafTur,rafKat,rafNo,rafIndex
 
+
+def unpickle_database(filename):
+    with open(filename, 'rb') as f:
+        while True:
+            try:
+                yield pickle.load(f)
+            except EOFError:
+                break
+
+def save_object(obj, filename,a):
+
+    if a < 1:
+        with open(filename, 'wb+') as output:
+            pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+    else :
+        with open(filename, 'ab+') as output:
+            pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+
+
 def delPic():
-    infile = open('noSqlDB', 'rb+')
+    infile = open('noSqlDB', 'rb')
+    students = list(unpickle_database('noSqlDB'))
+
     sistem = pickle.load(infile)
+
+    temp =0
     flag = False
+
 
     rafTur = str(input('Rafın türünü giriniz : '))
     rafKat = int(input('Rafın katını giriniz : '))
     rafNo = int(input('Rafın Nosunu giriniz : '))
     rafIndex = int(input('Rafın indexini giriniz : '))
 
-    # read to the end of file.
-    for x in range((len(sistem)+1)):
+    for x in range((len(sistem) + 1)):
         try:
 
-            if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem['rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
-                print("vololo")
-                del  sistem['rafTur'],sistem['rafKat'],sistem['rafNo'],sistem['rafIndex'],sistem['rafIndexData']
+            if (sistem['rafTur'].upper() == rafTur.upper() and sistem['rafKat'] == rafKat and sistem[
+                'rafNo'] == rafNo and sistem['rafIndex'] == rafIndex):
+
+                del students[x]
                 flag = True
 
-
+            sistem = pickle.load(infile)
         except EOFError:
             break
 
     if flag == False:
         print('Record not Found')
+        print()
 
-    infile.close()
+
+
+
+
+    for student in students:
+        print(student)
+        save_object(student, 'noSqlDB',temp)
+        temp += 1
