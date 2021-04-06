@@ -37,6 +37,9 @@ def main():
         elif choice == '6':
             req.sortPic()
 
+        elif choice == '7':
+            req.getExcell()
+
 
 
         else:

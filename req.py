@@ -1,5 +1,5 @@
 import pickle
-
+from csv import DictWriter
 
 
 def set_data():
@@ -194,3 +194,10 @@ def sortPic():
         print(x)
         save_object(x, 'noSqlDB', temp)
         temp += 1
+
+def getExcell():
+    sistemList = list(unpickle_database('noSqlDB'))
+    with open('spreadsheet.csv', 'w') as outfile:
+        writer = DictWriter(outfile, ('rafTur', 'rafKat', 'rafNo', 'rafIndex', 'rafIndexData'))
+        writer.writeheader()
+        writer.writerows(sistemList)
